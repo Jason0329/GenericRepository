@@ -32,6 +32,7 @@ namespace GenericRepository.Models
 
 
             base.OnModelCreating(modelBuilder);
+            
         }
     }
 }

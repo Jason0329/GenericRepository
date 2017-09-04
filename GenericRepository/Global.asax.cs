@@ -24,6 +24,8 @@ namespace GenericRepository
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
+
+            Database.SetInitializer<TechnologicalDataObjectContext>(new DropCreateDatabaseIfModelChanges<TechnologicalDataObjectContext>());
             var builder = new ContainerBuilder();
 
            
@@ -41,8 +43,8 @@ namespace GenericRepository
             tt.Company = 2330;
             tt.Date = DateTime.Now;
             tt.Volume = 9000;
-            //container.ResolveOptional<TechnologicalDataModel>(new TypedParameter(typeof(TechnologicalDataModel), new TechnologicalDataModel()));
-            List<TechnologicalDataModel> aa=container.Resolve<IRepository<TechnologicalDataModel>>(new TypedParameter(typeof(DbContext), new TechnologicalDataObjectContext())).GetAll().ToList();
+            container.ResolveOptional<IRepository<TechnologicalDataModel>>(new TypedParameter(typeof(DbContext), new TechnologicalDataObjectContext())).Create(tt);
+            //List<TechnologicalDataModel> aa=container.Resolve<IRepository<TechnologicalDataModel>>(new TypedParameter(typeof(DbContext), new TechnologicalDataObjectContext())).GetAll().ToList();
 
         }
     }
